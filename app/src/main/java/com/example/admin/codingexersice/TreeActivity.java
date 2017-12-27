@@ -10,8 +10,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class Main2Activity extends AppCompatActivity {
+public class TreeActivity extends AppCompatActivity {
 
+    private static String levelOrder;
     @BindView(R.id.node1)
     EditText node1;
     @BindView(R.id.node2)
@@ -24,9 +25,7 @@ public class Main2Activity extends AppCompatActivity {
     EditText node5;
     @BindView(R.id.results)
     TextView results;
-
     MyTree<Integer> root;
-    private static String levelOrder;
 
     public static <T> void printNodesLO(MyTree<T> root) {
 
@@ -67,15 +66,21 @@ public class Main2Activity extends AppCompatActivity {
     @OnClick(R.id.printResult)
     public void onViewClicked() {
         levelOrder = "This is a print out of the tree by level order \n\n";
+        // regex string to check if value is a number
         String regex = "\\d+";
 
-        // Root
-        if (node1.getText().toString().matches(regex)) {
+        Toast.makeText(this, "" + node1.toString().isEmpty(), Toast.LENGTH_SHORT).show();
 
+        // Root Level
+        // Checks if root is a number and is not null before proceeding
+        if (node1.getText().toString().matches(regex) && node1.toString().isEmpty()) {
+
+            // Adds user input in first node as root
             root = new MyTree<>(Integer.parseInt(node1.getText().toString()));
 
             // Level 1 LEFT
             if (node2.getText().toString().matches(regex)) {
+                // Adds user input in second node as roots left child
                 root.left = new MyTree<>(Integer.parseInt(node2.getText().toString()));
 
                 // Level 2 LEFT
@@ -86,14 +91,13 @@ public class Main2Activity extends AppCompatActivity {
                 if (node5.getText().toString().matches(regex)) {
                     root.left.right = new MyTree<>(Integer.parseInt(node5.getText().toString()));
                 }
-
             }
 
             // Level 1 RIGHT
             if (node3.getText().toString().matches(regex)) {
+                // Adds user input in third node as roots right child
                 root.right = new MyTree<>(Integer.parseInt(node3.getText().toString()));
             }
-
 
             printNodesLO(root);
             results.setText(levelOrder);

@@ -26,10 +26,19 @@ public class LevelOrderQueue<T> {
         this.tail = null;
     }
 
+    /**
+     *
+     * @return size of Queue
+     */
     public int size() {
         return size;
     }
 
+    /**
+     * Adds data to Queue
+     *
+     * @param data
+     */
     public void enqueue(T data) {
         if(data == null)
             return;
@@ -44,6 +53,11 @@ public class LevelOrderQueue<T> {
         size++;
     }
 
+    /**
+     * Removes data from Queue
+     *
+     * @return new Queue or Null if empty
+     */
     public T dequeue() {
 
         if(tail != null) {
@@ -58,6 +72,11 @@ public class LevelOrderQueue<T> {
         return null;
     }
 
+    /**
+     * Checks if Queue is empty
+     *
+     * @return true or false
+     */
     public boolean isEmpty() {
         return size == 0;
     }
